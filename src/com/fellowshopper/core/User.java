@@ -18,6 +18,9 @@ public class User {
 		this.phoneNumber = phoneNumber;
 		this.userName = username;
 	}
+	public User() {
+		// TODO Auto-generated constructor stub
+	}
 	public String getFirstName() {
 		return firstName;
 	}

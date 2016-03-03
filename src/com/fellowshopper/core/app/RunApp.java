@@ -8,6 +8,7 @@ import java.sql.Statement;
 import com.fellowshopper.core.DBConnection;
 import com.fellowshopper.core.Requestor;
 import com.fellowshopper.core.User;
+import com.fellowshopper.core.requestor.RequestorUserHandler;
 import com.fellowshopper.core.user.UserManager;
 import com.fellowshopper.core.user.UserManagerImpl;
 
@@ -17,17 +18,25 @@ public class RunApp {
 		
 		
 	
-		if (checkUsers() == 1) ;{
+		if (checkUsers() == 1) {
+			
+			System.out.println("No of requestors is 1 " );
+			RequestorUserHandler reqHandler = new RequestorUserHandler();
+			reqHandler.handleUser();
 			
 		}
 		
 		//creating a new user
-		
-		User user = new Requestor("Avinash", "Vutukuri", "avinash79", "718-309-2875");
-		
-		UserManager usrMngr = new UserManagerImpl();
-		
-		usrMngr.addUser(user);
+if (checkUsers() == 0) {
+			
+	User user = new Requestor("Avinash", "Vutukuri", "avinash79", "718-309-2875");
+	
+	UserManager usrMngr = new UserManagerImpl();
+	
+	usrMngr.addUser(user);
+			
+		}
+	
 		
 
 	}
@@ -43,7 +52,7 @@ public class RunApp {
 		try {
 			stmt = conn.createStatement();
 			
-			String sql = "Select * from user";
+			String sql = "Select * from user where user_type = 'Requestor' ";
 			
 			resultSet = stmt.executeQuery(sql);
 			  

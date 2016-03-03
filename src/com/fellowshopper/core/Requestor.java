@@ -12,6 +12,10 @@ public class Requestor extends User {
 	
 	}
 
+	public Requestor() {
+		super();
+	}
+
 	public List<Product> getMyShoppingList() {
 		return myShoppingList;
 	}
