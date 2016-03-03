@@ -6,15 +6,17 @@ public class User {
 	private String firstName;
 	private String lastName;
 	private String UID;
+	private String userName;
 	private String phoneNumber;
 	
-	private static int totalRequestors=0;
+
 	
-	public User(String firstName, String lastName, String phoneNumber) {
+	public User(String firstName, String lastName,String username, String phoneNumber) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
+		this.userName = username;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -40,11 +42,12 @@ public class User {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public static int getTotalRequestors() {
-		return totalRequestors;
+	public String getUserName() {
+		return userName;
 	}
-	public static void setTotalRequestors(int totalRequestors) {
-		User.totalRequestors = totalRequestors;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
+	
 	
 }

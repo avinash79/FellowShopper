@@ -5,7 +5,7 @@ import com.fellowshopper.core.User;
 public interface UserManager {
 
 	
-	void addUser();
+	void addUser(User user);
 	
 	void modifyUser(User user);
 	
