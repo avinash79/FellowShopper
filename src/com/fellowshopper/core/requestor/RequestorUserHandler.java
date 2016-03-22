@@ -4,29 +4,63 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 import com.fellowshopper.core.DBConnection;
+import com.fellowshopper.core.Product;
 import com.fellowshopper.core.Requestor;
 import com.fellowshopper.core.User;
 
 public class RequestorUserHandler {
 	
-	User requestorUser;
+	Requestor requestorUser;
+	ShoppingListManager listManager ;
 	
 	public void handleUser(){
 		
 		
-		User user =	getUserDetails();
+		requestorUser =	getUserDetails();
 		
-		System.out.println("Handling a new user: "+ user.getFirstName() + " , " + user.getLastName() + " , " + user.getUserName()
-							+ " , " + user.getUID());
+		System.out.println("Handling a new user: "+ requestorUser.getFirstName() + " , " + requestorUser.getLastName() + " , " + requestorUser.getUserName()
+							+ " , " + requestorUser.getUID());
 		
+		Scanner in = new Scanner(System.in);
+		int input = in.nextInt();
+		
+		switch(input){
+		
+		case 1: 
+		System.out.println("My Current List: "+ requestorUser.getMyShoppingList());
+		break;
+		
+		case 2: 
+			addProduct();
+			break;
+			
+		case 3:
+			deletProduct();
+			break;
+		
+		
+		
+		}
+	}
+
+	private void deletProduct() {
+		// TODO Auto-generated method stub
 		
 	}
 
-	private User getUserDetails() {
+	private void addProduct() {
+		listManager = new ShoppingListManagerImpl();
+		Product product = new Product();
+		listManager.addProductToList(product, requestorUser);
 		
-		User user = new Requestor();
+	}
+
+	private Requestor getUserDetails() {
+		
+		Requestor user = new Requestor();
 		
 		Connection conn = DBConnection.getConnection();
 		
