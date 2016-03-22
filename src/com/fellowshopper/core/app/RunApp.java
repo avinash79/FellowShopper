@@ -21,8 +21,9 @@ public class RunApp {
 		if (checkUsers() == 1) {
 			
 			System.out.println("No of requestors is 1 " );
+			Requestor requestorUser =	getUserDetails();
 			RequestorUserHandler reqHandler = new RequestorUserHandler();
-			reqHandler.handleUser();
+			reqHandler.handleUser(requestorUser);
 			
 		}
 		
@@ -74,4 +75,35 @@ if (checkUsers() == 0) {
 			    return 0;	
 	}
 
+	
+	
+	private static Requestor getUserDetails() {
+		
+		Requestor user = new Requestor();
+		
+		Connection conn = DBConnection.getConnection();
+		
+		Statement stmt= null;
+		ResultSet rs = null;
+		
+		try {
+			stmt = conn.createStatement();
+			
+			String sql = "Select * from user where user_type = 'Requestor'";
+			
+			rs = stmt.executeQuery(sql);
+			rs.next();
+			
+			user.setUserName(rs.getString("username"));
+			user.setFirstName(rs.getString("first_name"));
+			user.setLastName(rs.getString("last_name"));
+			user.setPhoneNumber(rs.getString("phone_num"));
+			user.setUID(rs.getString("id"));
+			
+			} catch (SQLException exp) {
+			        exp.printStackTrace();
+			    } 
+		return user;
+	}
+	
 }

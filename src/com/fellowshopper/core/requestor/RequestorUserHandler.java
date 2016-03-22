@@ -13,16 +13,20 @@ import com.fellowshopper.core.User;
 
 public class RequestorUserHandler {
 	
-	Requestor requestorUser;
+	
 	ShoppingListManager listManager ;
 	
-	public void handleUser(){
+	public void handleUser(Requestor requestorUser){
 		
-		
-		requestorUser =	getUserDetails();
 		
 		System.out.println("Handling a new user: "+ requestorUser.getFirstName() + " , " + requestorUser.getLastName() + " , " + requestorUser.getUserName()
 							+ " , " + requestorUser.getUID());
+		
+		System.out.println("Welcome: "+ requestorUser.getFirstName() + " , " + requestorUser.getLastName() +"\n"
+				+ "Select from the below Options \n"
+				+ "1. Show my current List \n"
+				+ "2. Add a Product to my List \n"
+				+ "3. Delete a Product from my List\n");
 		
 		Scanner in = new Scanner(System.in);
 		int input = in.nextInt();
@@ -34,16 +38,15 @@ public class RequestorUserHandler {
 		break;
 		
 		case 2: 
-			addProduct();
+			addProduct(requestorUser);
 			break;
 			
 		case 3:
 			deletProduct();
 			break;
-		
-		
-		
+			
 		}
+		in.close();
 	}
 
 	private void deletProduct() {
@@ -51,40 +54,13 @@ public class RequestorUserHandler {
 		
 	}
 
-	private void addProduct() {
+	private void addProduct(Requestor requestorUser) {
 		listManager = new ShoppingListManagerImpl();
 		Product product = new Product();
 		listManager.addProductToList(product, requestorUser);
 		
 	}
 
-	private Requestor getUserDetails() {
-		
-		Requestor user = new Requestor();
-		
-		Connection conn = DBConnection.getConnection();
-		
-		Statement stmt= null;
-		ResultSet rs = null;
-		
-		try {
-			stmt = conn.createStatement();
-			
-			String sql = "Select * from user where user_type = 'Requestor'";
-			
-			rs = stmt.executeQuery(sql);
-			rs.next();
-			
-			user.setUserName(rs.getString("username"));
-			user.setFirstName(rs.getString("first_name"));
-			user.setLastName(rs.getString("last_name"));
-			user.setPhoneNumber(rs.getString("phone_num"));
-			user.setUID(rs.getString("id"));
-			
-			} catch (SQLException exp) {
-			        exp.printStackTrace();
-			    } 
-		return user;
-	}
+
 
 }

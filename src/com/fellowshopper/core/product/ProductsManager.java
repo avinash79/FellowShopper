@@ -1,5 +1,7 @@
 package com.fellowshopper.core.product;
 
+import java.util.List;
+
 import com.fellowshopper.core.Product;
 
 public interface ProductsManager {
@@ -10,6 +12,8 @@ public interface ProductsManager {
 	void modifyProduct(Product product);
 	
 	void deleteProduct(Product product);
+	
+	List<Product> getProducts();
 	
 	
 }
