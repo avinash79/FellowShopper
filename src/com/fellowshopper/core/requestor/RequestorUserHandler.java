@@ -77,7 +77,7 @@ public class RequestorUserHandler {
 //		    .productsField( "search", "tomatoes" );
 		
 		products
-	    .productsField( "upc", "00044100105401" )
+	    .productsField( "upc", "021130070107" )
 	    .productsField( "fields", "name","gtins" );
 
 		try {	
